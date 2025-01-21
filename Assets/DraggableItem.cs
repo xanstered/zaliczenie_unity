@@ -9,6 +9,8 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public Image image;
     [HideInInspector] public Transform parentAfterDrag;
 
+    public ItemType itemType;
+
 
     public void OnBeginDrag(PointerEventData eventData)
     {

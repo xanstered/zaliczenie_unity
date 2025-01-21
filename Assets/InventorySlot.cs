@@ -5,13 +5,22 @@ using UnityEngine.EventSystems;
 
 public class InventorySlot : MonoBehaviour, IDropHandler
 {
+    public List<ItemType> acceptedItemTypes = new List<ItemType>();
     public void OnDrop(PointerEventData eventData)
     {
-        if (transform.childCount == 0)
+        GameObject dropped = eventData.pointerDrag;
+        if (dropped != null)
         {
-            GameObject dropped = eventData.pointerDrag;
             DraggableItem draggableItem = dropped.GetComponent<DraggableItem>();
-            draggableItem.parentAfterDrag = transform;
+
+            if (acceptedItemTypes.Count == 0 || acceptedItemTypes.Contains(draggableItem.itemType))
+            {
+                draggableItem.parentAfterDrag = transform;
+            }
+            else
+            {
+                Debug.Log("ten przedmiot nie pasuje do tego slotu");
+            }
         }
     }
 
